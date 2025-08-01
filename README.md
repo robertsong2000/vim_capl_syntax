@@ -13,6 +13,7 @@ CAPL是Vector公司开发的专用语言，主要用于汽车测试、仿真和�
 - **自动缩进**: 适合CAPL代码的缩进设置
 - **编译集成**: 提供基本的编译命令框架
 - **自定义颜色主题**: 内置丰富的颜色方案，告别单调的红绿色
+- **新主题配置**: 支持暗色、亮色、高对比度三种主题，可自定义配色
 
 ## 安装方法
 
@@ -56,6 +57,47 @@ autocmd FileType capl setlocal tabstop=4
 " 禁用自动折叠
 autocmd FileType capl setlocal foldmethod=manual
 ```
+
+### 颜色主题配置
+
+支持三种主题模式：
+
+**暗色主题**（默认）：
+```vim
+" 在.vimrc中添加
+let g:capl_theme = 'dark'
+```
+
+**亮色主题**：
+```vim
+" 在.vimrc中添加
+let g:capl_theme = 'light'
+```
+
+**高对比度主题**：
+```vim
+" 在.vimrc中添加
+let g:capl_theme = 'highcontrast'
+```
+
+**临时切换主题**（无需重启vim）：
+```vim
+" 在vim中执行
+:let g:capl_theme = 'light'
+:source ~/.vim/colors/capl_colors.vim
+```
+
+### 颜色说明
+
+| 语法元素 | 暗色主题 | 亮色主题 | 描述 |
+|----------|----------|----------|------|
+| 数据类型 | 蓝色 | 蓝色 | int, long, float等 |
+| 事件处理器 | 紫色 | 紫色 | on start, on message等 |
+| 内置函数 | 黄色/绿色 | 棕色 | setTimer, output等 |
+| 常量 | 青色 | 绿色 | 宏定义和常量 |
+| 字符串 | 橙色 | 红色 | 字符串字面量 |
+| 数字 | 绿色 | 绿色 | 数值字面量 |
+| 注释 | 绿色 | 绿色 | 代码注释 |
 
 ## 支持的文件类型
 
