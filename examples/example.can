@@ -1,0 +1,72 @@
+/*
+ * 示例CAPL文件 - 演示语法高亮
+ * 这是一个简单的CAN消息处理示例
+ */
+
+includes
+{
+  #include "header.cin"
+}
+
+variables
+{
+  msTimer timer1;
+  message CAN1.msg1 msg;
+  int counter = 0;
+  const int MAX_COUNT = 100;
+}
+
+on start
+{
+  setTimer(timer1, 1000);  // 设置1秒定时器
+  write("CAPL程序启动");
+}
+
+on timer timer1
+{
+  counter++;
+  
+  if (counter >= MAX_COUNT)
+  {
+    counter = 0;
+    write("计数器重置");
+  }
+  
+  // 设置消息内容
+  msg.byte(0) = counter & 0xFF;
+  msg.byte(1) = (counter >> 8) & 0xFF;
+  
+  output(msg);  // 发送CAN消息
+  
+  setTimerCyclic(timer1, 1000);  // 重新启动定时器
+}
+
+on message msg1
+{
+  int receivedValue;
+  
+  receivedValue = this.byte(0) | (this.byte(1) << 8);
+  
+  write("收到消息，值: %d", receivedValue);
+  
+  if (receivedValue == 0xFF)
+  {
+    write("收到特殊值");
+  }
+}
+
+on key 'a'
+{
+  write("按键A被按下");
+  cancelTimer(timer1);
+}
+
+on preStop
+{
+  write("程序即将停止");
+}
+
+on stopMeasurement
+{
+  write("测量停止");
+}
