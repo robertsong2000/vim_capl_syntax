@@ -60,6 +60,8 @@ autocmd FileType capl setlocal foldmethod=manual
 
 ### 颜色主题配置
 
+默认主题已设置为暗色主题，如需更改，可在.vimrc中添加相应配置:
+
 支持三种主题模式：
 
 **暗色主题**（默认）：

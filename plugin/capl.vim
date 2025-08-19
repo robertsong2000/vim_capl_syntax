@@ -6,6 +6,11 @@ if exists("g:loaded_capl")
 endif
 let g:loaded_capl = 1
 
+" Set default CAPL theme to dark
+if !exists("g:capl_theme")
+  let g:capl_theme = 'dark'
+endif
+
 " Set comment strings
 autocmd FileType capl setlocal commentstring=//%s
 autocmd FileType capl setlocal comments=s1:/*,mb:*,ex:*/,://
